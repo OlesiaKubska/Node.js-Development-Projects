@@ -1,69 +1,49 @@
-import fs from "fs/promises";
-import { nanoid } from "nanoid";
-import path from "path";
+import { Schema, model } from "mongoose";
+import Joi from "joi";
 
-const contactsPath = path.resolve("models", "contacts.json");
+import { handleSaveError, preUpdate } from "./hooks.js";
 
-export const listContacts = async () => {
-  try {
-    const data = await fs.readFile(contactsPath, "UTF8");
-    return JSON.parse(data);
-  } catch (error) {
-    throw new Error(`Failed to retrieve the contact list: ${error.message}`);
-  }
-}
-
-export const getContactById = async (contactId) => {
-  try {
-    const contacts = await listContacts();
-    const result = contacts.find((contact) => contact.id === contactId);
-    return result || null;
-  } catch (error) {
-    throw new Error(`Failed to retrieve the contact list: ${error.message}`);
-  }
-}
-
-export const removeContact = async (contactId) => {
-  try {
-    const contacts = await listContacts();
-    const index = contacts.findIndex((contact) => contact.id === contactId);
-
-    if (index === -1) {
-      return null;
+const contactSchema = new Schema({
+    name: {
+        type: String,
+        required: [true, 'Set name for contact'],
+    },
+    email: {
+        type: String,
+    },
+    phone: {
+        type: String,
+    },
+    favorite: {
+        type: Boolean,
+        default: false,
     }
-  
-    const [removedContact] = contacts.splice(index, 1);
-    await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
-    return removedContact;
-  } catch (error) {
-    throw new Error(`Failed to retrieve the contact list: ${error.message}`);
-  }
-}
+}, { versionKey: false, timestamps: true });
 
-export const addContact = async (name, email, phone) => {
-  try {
-    const contacts = await listContacts();
-    const newContact = { id: nanoid(), name, email, phone };
+contactSchema.post("save", handleSaveError);
 
-    contacts.push(newContact);
-    await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
-    return newContact;
-  } catch (error) {
-    throw new Error(`Failed to retrieve the contact list: ${error.message}`);
-  }
-}
+contactSchema.pre("findOneAndUpdate", preUpdate);
 
-export const updateContact = async (contactId, data) => {
-  try {
-    const contacts = await listContacts();
-    const index = contacts.findIndex((contact) => contact.id === contactId);
-    if (index === -1) {
-      return null;
-    }
-    contacts[index] = { ...contacts[index], ...data };
-    await fs.writeFile(contactsPath, JSON.stringify(contacts));
-    return contacts[index];
-  } catch (error) {
-    throw new Error(`Failed to retrieve the contact list: ${error.message}`);
-  }
-}
+contactSchema.post("findOneAndUpdate", handleSaveError);
+
+export const contactAddSchema = Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string(),
+    phone: Joi.string(),
+    favorite: Joi.boolean(),
+})
+
+export const contactUpdateSchema = Joi.object({
+    name: Joi.string(),
+    email: Joi.string(),
+    phone: Joi.string(),
+    favorite: Joi.boolean(),
+})
+
+export const contactFavoriteSchema = Joi.object({
+    favorite: Joi.boolean().required(),
+})
+
+const Contact = model("contact", contactSchema);
+
+export default Contact;
