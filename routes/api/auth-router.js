@@ -6,14 +6,14 @@ import { userSigninSchema, userSignupSchema } from "../../models/User.js";
 
 const authRouter = express.Router();
 
-authRouter.post("/users/register", isEmtyBody, validateBody(userSignupSchema), authController.signup);
+authRouter.post("/register", isEmtyBody, validateBody(userSignupSchema), authController.signup);
 
-authRouter.post("/users/login", isEmtyBody, validateBody(userSigninSchema), authController.signin);
+authRouter.post("/login", isEmtyBody, validateBody(userSigninSchema), authController.signin);
 
-authRouter.get("/users/current", authenticate, authController.getCurrent);
+authRouter.get("/current", authenticate, authController.getCurrent);
 
-authRouter.post("/users/logout", authenticate, authController.signout);
+authRouter.post("/logout", authenticate, authController.signout);
 
-authRouter.patch("/users", authenticate, authController.updateSubscription);
+authRouter.patch("/", authenticate, authController.updateSubscription);
 
 export default authRouter;
