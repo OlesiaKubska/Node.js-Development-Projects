@@ -1,11 +1,11 @@
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
 const getCurrent = async (req, res) => {
-    const { subscription, email } = req.user;
+    const { email, subscription } = req.user;
 
     res.json({
-        subscription,
         email,
+        subscription,
     })
 }
 
