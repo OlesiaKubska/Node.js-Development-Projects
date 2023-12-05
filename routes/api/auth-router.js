@@ -1,6 +1,6 @@
 import express from "express";
 import { authController } from "../../controllers/auth-controllers/index.js";
-import { authenticate, isEmtyBody} from "../../middlewares/index.js";
+import { authenticate, isEmtyBody, upload} from "../../middlewares/index.js";
 import { validateBody } from "../../decorators/index.js";
 import { userSigninSchema, userSignupSchema } from "../../models/User.js";
 
@@ -15,5 +15,7 @@ authRouter.get("/current", authenticate, authController.getCurrent);
 authRouter.post("/logout", authenticate, authController.signout);
 
 authRouter.patch("/", authenticate, authController.updateSubscription);
+
+authRouter.patch("/avatars", authenticate, upload.single("avatar"), authController.updateAvatar); 
 
 export default authRouter;
