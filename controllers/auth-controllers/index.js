@@ -3,6 +3,7 @@ import signin from "./signin.js";
 import signout from "./signout.js";
 import signup from "./signup.js";
 import updateSubscription from "./updateSubscription.js";
+import updateAvatar from "./updateAvatar.js";
 
 export const authController = {
     getCurrent,
@@ -10,4 +11,5 @@ export const authController = {
     signout,
     signup,
     updateSubscription,
+    updateAvatar,
 };
