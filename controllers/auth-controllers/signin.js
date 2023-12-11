@@ -8,11 +8,17 @@ import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 const {JWT_SECRET} = process.env;
 
 const signin = async (req, res) => {
-    const {email, password} = req.body;
-    const user = await User.findOne({email});
+    const { email, password } = req.body;
+    
+    const user = await User.findOne({ email });
     if(!user) {
         throw HttpError(401, "Email or password is wrong");
     }
+
+    if (!user.verify) {
+        throw HttpError(404, "User not found");
+    }
+    
     const passwordCompare = await bcrypt.compare(password, user.password);
     if(!passwordCompare) {
         throw HttpError(401, "Email or password is wrong");
@@ -22,10 +28,10 @@ const signin = async (req, res) => {
         id: user._id,
     }
 
-    const token = jwt.sign(payload, JWT_SECRET, {expiresIn: "23h"});
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
 
     res.json({
-        token,
+        token: token,
         user: {
             email: user.email,
             subscription: user.subscription
