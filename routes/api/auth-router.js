@@ -2,11 +2,15 @@ import express from "express";
 import { authController } from "../../controllers/auth-controllers/index.js";
 import { authenticate, isEmtyBody, upload} from "../../middlewares/index.js";
 import { validateBody } from "../../decorators/index.js";
-import { userSigninSchema, userSignupSchema } from "../../models/User.js";
+import { userSigninSchema, userSignupSchema, userEmailSchema } from "../../models/User.js";
 
 const authRouter = express.Router();
 
 authRouter.post("/register", isEmtyBody, validateBody(userSignupSchema), authController.signup);
+
+authRouter.get("/verify/:verificationToken", authController.verify);
+
+authRouter.post("/verify", isEmtyBody, validateBody(userEmailSchema), authController.resendVerify);
 
 authRouter.post("/login", isEmtyBody, validateBody(userSigninSchema), authController.signin);
 

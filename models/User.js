@@ -3,7 +3,7 @@ import Joi from "joi";
 
 import { handleSaveError, preUpdate } from "./hooks.js";
 
-const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const userSchema = new Schema({
     password: {
@@ -24,7 +24,17 @@ const userSchema = new Schema({
     avatarURL: {
         type: String,
     },
-    token: String
+    token: {
+        type: String,
+    },
+    verify: {
+        type: Boolean,
+        default: false,
+    },
+    verificationToken: {
+        type: String,
+        required: [true, 'Verify token is required'],
+    }
 }, { versionKey: false, timestamps: true });
 
 userSchema.post("save", handleSaveError);
@@ -41,6 +51,10 @@ export const userSignupSchema = Joi.object({
 
 export const userSigninSchema = Joi.object({
     password: Joi.string().min(6).required(),
+    email: Joi.string().pattern(emailRegexp).required(),
+})
+
+export const userEmailSchema = Joi.object({
     email: Joi.string().pattern(emailRegexp).required(),
 })
 
