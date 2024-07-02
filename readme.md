@@ -6,11 +6,26 @@ This repository contains completed assignments from the Node.js course. The assi
 
 ## 📂 Repository Structure
 
-- hw02 - Task 2
-- hw03 - Task 3
-- hw04 - Task 4
-- hw05 - Task 5
-- hw06 - Task 6
+- **hw02** - Task 2
+- **hw03** - Task 3
+- **hw04** - Task 4
+- **hw05** - Task 5
+- **hw06** - Task 6
+
+## 🛠️ Technologies Used
+
+- **Node.js** - JavaScript runtime environment
+- **Express** - Web framework for Node.js
+- **Mongoose** - MongoDB object modeling tool
+- **MongoDB Atlas** - Cloud database service for MongoDB
+- **Joi** - Data validation library
+- **JWT** - JSON Web Tokens for authentication
+- **Multer** - Middleware for handling multipart/form-data, used for file uploads
+- **Gravatar** - Globally Recognized Avatars
+- **Jimp** - Image processing library
+- **SendGrid** - Email delivery service
+- **Postman** - API development environment
+- **Eslint** - Pluggable JavaScript linter
 
 ## 📜 Commands
 
@@ -24,8 +39,8 @@ This repository contains completed assignments from the Node.js course. The assi
 ### 📝 Task 1
 
 - Project initialization and dependency setup.
-- Creation of a CLI utility for managing contacts using the commander package.
-- Implementation of CRUD operations for working with contacts in the contacts.json file.
+- Creation of a CLI utility for managing contacts using the `commander` package.
+- Implementation of CRUD operations for working with contacts in the `contacts.json` file.
 
 ### 🌐 Task 2
 
@@ -43,13 +58,13 @@ This repository contains completed assignments from the Node.js course. The assi
 - Using MongoDB Compass to manage the database.
 - Importing existing contacts into the database.
 - Rewriting CRUD operations to work with MongoDB using Mongoose.
-- Adding a new favorite field for contacts.
-- Implementing a PATCH route to update the favorite status of a contact.
+- Adding a new `favorite` field for contacts.
+- Implementing a PATCH route to update the `favorite` status of a contact.
 
 ### 🔐 Task 4
 
 - Implementation of user authentication and authorization using JWT.
-- Creating a user model with email, password, subscription, and token fields.
+- Creating a user model with `email`, `password`, `subscription`, and `token` fields.
 - Registering users with password hashing.
 - User login with token generation and storage.
 - Protecting private routes with middleware to verify tokens.
@@ -62,10 +77,10 @@ This repository contains completed assignments from the Node.js course. The assi
 - Adding the ability to upload user avatars using Multer.
 - Setting up static file serving with Express.
 - Using gravatar to automatically generate avatars during user registration.
-- Adding an avatarURL field to the user model to store the avatar link.
+- Adding an `avatarURL` field to the user model to store the avatar link.
 - Implementing a route to update the user's avatar.
 - Storing uploaded files in a temporary folder and processing them with jimp.
-- Moving processed files to the public/avatars folder with unique names.
+- Moving processed files to the `public/avatars` folder with unique names.
 
 ### ✉️ Task 6
 
