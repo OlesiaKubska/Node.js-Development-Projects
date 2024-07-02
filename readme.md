@@ -1,31 +1,78 @@
-## GoIT Node.js Course Template Homework
+# Node.js Development Projects
 
-Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
-Форк створить репозиторій на вашому http://github.com
+## 📄 Project Description
 
-Додайте ментора до колаборації
+This repository contains completed assignments from the Node.js course. The assignments are executed step-by-step in the form of separate branches for each task. The repository demonstrates skills in working with Node.js, asynchronous functions, the file system, module usage, and project management on GitHub.
 
-Для кожної домашньої роботи створюйте свою гілку.
+## 📂 Repository Structure
 
-- hw02
-- hw03
-- hw04
-- hw05
-- hw06
+- hw02 - Task 2
+- hw03 - Task 3
+- hw04 - Task 4
+- hw05 - Task 5
+- hw06 - Task 6
 
-Кожна нова гілка для др повинна робитися з master
+## 📜 Commands
 
-Після того, як ви закінчили виконувати домашнє завдання у своїй гілці, необхідно зробити пулл-реквест (PR). Потім додати ментора для рев'ю коду. Тільки після того, як ментор заапрувить PR, ви можете виконати мердж гілки з домашнім завданням у майстер.
+- `npm start` &mdash; start the server in production mode
+- `npm run start:dev` &mdash;  start the server in development mode
+- `npm run lint` &mdash; run code linting with eslint, should be executed before each PR and fix all linter errors
+- `npm lint:fix` &mdash; run the linter check with automatic fixing of simple errors
 
-Уважно читайте коментарі ментора. Виправте зауваження та зробіть коміт у гілці з домашнім завданням. Зміни підтягнуться у PR автоматично після того, як ви відправите коміт з виправленнями на github
-Після виправлення знову додайте ментора на рев'ю коду.
+## ✅ Completed Tasks
 
-- При здачі домашньої роботи є посилання на PR
-- JS-код чистий та зрозумілий, для форматування використовується Prettier
+### 📝 Task 1
 
-### Команди:
+- Project initialization and dependency setup.
+- Creation of a CLI utility for managing contacts using the commander package.
+- Implementation of CRUD operations for working with contacts in the contacts.json file.
 
-- `npm start` &mdash; старт сервера в режимі production
-- `npm run start:dev` &mdash; старт сервера в режимі розробки (development)
-- `npm run lint` &mdash; запустити виконання перевірки коду з eslint, необхідно виконувати перед кожним PR та виправляти всі помилки лінтера
-- `npm lint:fix` &mdash; та ж перевірка лінтера, але з автоматичними виправленнями простих помилок
+### 🌐 Task 2
+
+- Creation of a REST API for working with the contact collection.
+- Using Express to create the server and routing.
+- Implementation of controllers to handle GET, POST, PUT, and DELETE requests.
+- Data validation using the Joi package.
+- Error handling and creating user-friendly messages.
+- API testing using Postman.
+
+### 💾 Task 3
+
+- Transition to using MongoDB for data storage.
+- Creation of a MongoDB Atlas account and cluster setup.
+- Using MongoDB Compass to manage the database.
+- Importing existing contacts into the database.
+- Rewriting CRUD operations to work with MongoDB using Mongoose.
+- Adding a new favorite field for contacts.
+- Implementing a PATCH route to update the favorite status of a contact.
+
+### 🔐 Task 4
+
+- Implementation of user authentication and authorization using JWT.
+- Creating a user model with email, password, subscription, and token fields.
+- Registering users with password hashing.
+- User login with token generation and storage.
+- Protecting private routes with middleware to verify tokens.
+- Implementing a route to get the current user.
+- Implementing a route for user logout.
+- Additional features: pagination, contact filtering, updating user subscription.
+
+### 🖼️ Task 5
+
+- Adding the ability to upload user avatars using Multer.
+- Setting up static file serving with Express.
+- Using gravatar to automatically generate avatars during user registration.
+- Adding an avatarURL field to the user model to store the avatar link.
+- Implementing a route to update the user's avatar.
+- Storing uploaded files in a temporary folder and processing them with jimp.
+- Moving processed files to the public/avatars folder with unique names.
+
+### ✉️ Task 6
+
+- Adding email verification for users after registration using the SendGrid service.
+- Creating a SendGrid account and setting up an email sender.
+- Generating and storing a verification token for the user.
+- Implementing a route to verify the user's email.
+- Sending a verification email with a link during user registration.
+- Preventing login for users with unverified emails.
+- Implementing a route for resending the verification email.
